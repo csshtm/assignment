@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Function to count files in the current directory
+function count_files {
+    local num_files=$(ls -1 | wc -l)
+    echo "$num_files"
+}
+
+# Main function
+function guessing_game {
+    local correct=$(count_files)
+    local guess=-1
+
+    echo "Welcome to the Guessing Game!"
+
+    while [[ $guess -ne $correct ]]; do
+        read -p "Guess the number of files in the current directory: " guess
+
+        if [[ $guess -lt $correct ]]; then
+            echo "Your guess is too low."
+        elif [[ $guess -gt $correct ]]; then
+            echo "Your guess is too high."
+        fi
+    done
+
+    echo "Congratulations! You guessed the correct number of files: $correct"
+}
+
+# Call the main function
+guessing_game
